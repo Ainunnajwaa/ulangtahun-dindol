@@ -209,6 +209,52 @@
     }
   </script>
 
+  <!-- Salju bergerak dan hilang -->
+<style>
+  .snowflake {
+    position: fixed;
+    top: -30px;
+    color: #fff;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.8;
+    animation-name: fallSnow;
+    animation-timing-function: linear;
+  }
+
+  @keyframes fallSnow {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(100vh) translateX(50px);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const snowCount = 30;
+  const snowChars = ['❄️', '❅', '❆'];
+
+  for (let i = 0; i < snowCount; i++) {
+    let snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.fontSize = (10 + Math.random() * 20) + "px";
+    snow.style.animationDuration = (5 + Math.random() * 7) + "s";
+    snow.style.animationDelay = (Math.random() * 10) + "s";
+    snow.innerText = snowChars[Math.floor(Math.random() * snowChars.length)];
+    document.body.appendChild(snow);
+
+    // Hapus salju setelah animasi selesai supaya DOM tidak penuh
+    snow.addEventListener("animationend", () => snow.remove());
+  }
+</script>
+
+
   <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
